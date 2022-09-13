@@ -1,24 +1,24 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require('chai');
-const session = require('supertest-session');
 const app = require('../../src/app.js');
-const { Dog, conn } = require('../../src/db.js');
+const session = require('supertest-session');
 
 const agent = session(app);
-const dog = {
-  name: 'Pug',
-};
 
-describe('Videogame routes', () => {
-  before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
-  beforeEach(() => Dog.sync({ force: true })
-    .then(() => Dog.create(dog)));
-  describe('GET /dogs', () => {
-    it('should get 200', () =>
+describe('GET a una raza inexistente', () => {
+    it('Debe devolver un error indicando que no hay informacion para esa raza', () =>
+        agent.get('/dogs?name=pipo').expect('No se ha encontrado información para esa raza.')
+   );
+})
+
+
+describe('GET a un id inexistente', () => {
+  it('Debe devolver un error indicando que no hay informacion para ese id', () =>
+      agent.get('/dogs/89898989').expect('No hay una raza asociada a ese ID')
+ );
+})
+
+describe('GET a ruta /dogs devuelve status 200', () => {
+  it('Debe devolver un error indicando que no hay informacion para esa raza', () =>
       agent.get('/dogs').expect(200)
-    );
-  });
-});
+ );
+})
+

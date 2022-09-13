@@ -1,0 +1,77 @@
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.cardContainer{
+  /* display:flex;
+  flex-direction: row; */
+  background-color: rgb(166, 142, 101);
+  width: 400px;
+  height: 330px;
+  border: solid 10px rgb(47, 35, 13);
+  padding: 0px;
+  margin:5px;
+  border-radius: 01px;
+  
+}
+
+.desconocido{
+  
+  border: solid black 10px;
+}
+
+
+.title{
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-decoration: none;
+  justify-content: center;
+  align-items: flex-start;
+  color: black;
+  border: solid black;
+  /* border: solid black */
+  
+  
+}
+
+.link{
+  display:flex;
+  text-decoration: none;
+  
+}
+
+.link :hover{
+  text-decoration: none;
+  color:red;
+  transition-duration: 200ms;
+ 
+}
+
+
+ .imgContainer {
+  display:flex;
+  width: 400px;
+  /* border: solid green; */
+  justify-content: center;
+  background-color: rgb(166, 142, 101);
+  border-radius: 25px;
+  
+}
+ 
+/* Resize images */
+.imagen {
+  display:flex;
+  /* width: 300px;*/
+  height: 200px;
+  flex: 0 1 70%;
+  border: solid black;
+ 
+}
+
+
+
+

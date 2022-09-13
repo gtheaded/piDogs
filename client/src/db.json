@@ -1,0 +1,34 @@
+{
+  "dogs": [
+   {
+      "name":"0",
+      "minHeight":"1",
+      "maxHeight":"2",
+      "minWeight":"1",
+      "maxWeight":"2",
+      "life_span":"5",
+      "image":"0",
+      "temperament":[]
+   },
+   {
+    "name":"1",
+    "minHeight":"0",
+    "maxHeight":"0",
+    "minWeight":"0",
+    "maxWeight":"0",
+    "life_span":"0",
+    "image":"0",
+    "temperament":[]
+ },
+ {
+  "name":"2",
+  "minHeight":"0",
+  "maxHeight":"0",
+  "minWeight":"0",
+  "maxWeight":"0",
+  "life_span":"0",
+  "image":"0",
+  "temperament":[]
+}
+  ]
+ }

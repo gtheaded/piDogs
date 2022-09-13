@@ -1,0 +1,32 @@
+###
+### Get de todos los perros
+GET http://localhost:3001/dogs HTTP/1.1
+Content-Type: application/json
+
+### Get de un perro
+GET http://localhost:3001/dogs?name=fox HTTP/1.1
+Content-Type: application/json
+
+### Post new dog
+POST http://localhost:3001/dogs HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Lola",
+"height":"10",
+"weight":"8.5",
+"life_span":"15",
+"temperament":["Quiet","Playful"]
+}
+
+
+
+
+
+### Get de temperamento para cargar la db
+GET http://localhost:3001/temperaments HTTP/1.1
+Content-Type: application/json
+
+### Get de testeo
+GET http://localhost:3001/test HTTP/1.1
+Content-Type: application/json
