@@ -161,7 +161,7 @@ router.post('/dogs', async (req,res)=>{
     height,
     weight,
     image,
-    life_span: life_span>0?life_span:0
+    life_span: life_span?life_span:"No info about Life_span"
   })
 
 

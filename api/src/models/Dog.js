@@ -24,7 +24,9 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     life_span :{
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING,
+      defaultValue:'No information provided'
+
     },
     image: {
     type: DataTypes.STRING,

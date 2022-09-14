@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postDog, getTemperaments } from '../actions';
 import styles from './Styles/Home.module.css';
 
-function validate ({name, minHeight, maxHeight, minWeight, maxWeight}){
+function validate ({name, minHeight, maxHeight, minWeight, maxWeight, minLife_span, maxLife_span}){
   const error={}
   if(!name){
     error.name="Name is required";
@@ -33,7 +33,27 @@ function validate ({name, minHeight, maxHeight, minWeight, maxWeight}){
   } else if (parseFloat(maxWeight) < parseFloat(minWeight)){
     error.maxWeight="Max weight must be greater than Min weight"
   }
+  /* if(!minLife_span){
+    error.minLife_span="Min Life_span is required";
+  } else  */
 
+  if(minLife_span){
+    if (isNaN(minLife_span)){
+      error.minLife_span="min Life_span must be a number";
+    } else if (minLife_span<0){
+      error.minLife_span="min Life_span must be greater than 0"
+    } else if(isNaN(maxLife_span)){
+      error.maxLife_span="max Life_span must be a number";
+    } else if (parseFloat(maxLife_span) < parseFloat(minLife_span)){
+      error.maxLife_span="Max Life_span must be greater than Min Life_span"
+    }
+  }
+  if(!minLife_span && maxLife_span){
+    error.minLife_span="Min Lifespan is required if max lifespan is provided"
+  }
+  if(minLife_span && !maxLife_span){
+    error.maxLife_span="Max Lifespan is required if min lifespan is provided"
+  }
   return error;
 }
 
@@ -53,7 +73,8 @@ const DogBuilder=()=>{
     maxHeight:'',
     minWeight:'',
     maxWeight:'',
-    life_span:'',
+    minLife_span:'',
+    maxLife_span:'',
     image:'',
     temperament:[]
   })
@@ -102,10 +123,12 @@ const DogBuilder=()=>{
     if(duplicado){
       alert('That breed already exists'); 
     } 
-    if( !duplicado &&  !error.name && !error.minHeight && !error.maxHeight && !error.minWeight &&!error.maxWeight && input.name && input.minHeight && input.maxHeight && input.minWeight && input.maxWeight){
+    if( !duplicado &&  !error.name && !error.minHeight && !error.maxHeight && !error.minWeight &&!error.maxWeight &&!error.minLife_span && !error.maxLife_span && input.name && input.minHeight && input.maxHeight && input.minWeight && input.maxWeight){
+      
+      
       var newDog= {
         name: input.name,
-        life_span: input.life_span,
+        life_span: input.minLife_span && `${input.minLife_span} - ${input.maxLife_span}`,
         image: input.image,
         temperament: input.temperament,
         weight:`${input.minWeight} - ${input.maxWeight}`,
@@ -119,7 +142,8 @@ const DogBuilder=()=>{
         maxHeight:'',
         minWeight:'',
         maxWeight:'',
-        life_span:'',
+        minLife_span:'',
+        maxLife_span:'',
         image:'',
         temperament:[]
       })
@@ -154,8 +178,9 @@ const DogBuilder=()=>{
           </div>
 
 
-          <div className={styles.formFieldFullWidth}>
-            <input onChange={(e)=>handleInputChange(e)} type='text' placeholder='Life-span' name='life_span' value={input.life_span}></input>
+          <div className={styles.formField}>
+            <input onChange={(e)=>handleInputChange(e)} type='text' placeholder='min Life-span' name='minLife_span' value={input.minLife_span}></input>
+            <input onChange={(e)=>handleInputChange(e)} type='text' placeholder='max Life-span' name='maxLife_span' value={input.maxLife_span}></input>
           </div>
           
           <div className={styles.formFieldFullWidth}>
@@ -185,6 +210,9 @@ const DogBuilder=()=>{
             {error.maxHeight && error.general &&<div>{error.maxHeight}</div>}
             {error.minWeight && error.general &&<div>{error.minWeight}</div>}
             {error.maxWeight && error.general &&<div>{error.maxWeight}</div>}
+            {error.minLife_span && error.general &&<div>{error.minLife_span}</div>}
+            {error.maxLife_span && error.general &&<div>{error.maxLife_span}</div>}
+            
           </div>
         </form>
       </div>

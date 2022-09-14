@@ -81,7 +81,7 @@ return (
       <SearchBar></SearchBar>
       <select defaultValue={'default'} onChange={(e)=>handleSort(e)}>
         <option value="default" disabled hidden>
-            Order by Height
+            Order by Name
         </option>
         <option  value = 'asc' >Ascendente</option> 
         <option value = 'desc' >Descendente</option>          
