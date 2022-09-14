@@ -77,8 +77,8 @@ const getDbInfo = async () => {
 }
 
 const getAllDogs = async() =>{
-  const apiInfo = await getApiInfo();
   const dbInfo = await getDbInfo();
+  const apiInfo = await getApiInfo();
   const infoTotal = apiInfo.concat(dbInfo); 
  
   return infoTotal;
@@ -88,13 +88,13 @@ const getAllDogs = async() =>{
 /////////////////////////////////RUTAS//////////////////////////////////
 
 /////////////GET
-//Seria mejor hacerlo con findByPk por un tema de performance. Ver de cambiarlo si hay tiempo.
+
 router.get('/dogs/:idRaza', async (req,res)=>{
   const infoTota = await getAllDogs();
 
   const infoIdRaza = await infoTota.filter(e=> e.id.toString() === req.params.idRaza);
   if(infoIdRaza.length>0) return res.json(infoIdRaza);
-  return res.send('No hay una raza asociada a ese ID');
+  return res.status(404).send('No hay una raza asociada a ese ID');
 })
 
 
@@ -113,19 +113,6 @@ router.get('/dogs/:idRaza', async (req,res)=>{
 return res.send(dogs)
 }) 
 
-
-router.get('/dogsInDb',async (req,res)=>{
-   const name = req.query.name;
-   const dogs = await getDbInfo();
-   if(name){
-     const resultado = await dogs.filter(e=>e.name.toLowerCase().includes(name.toLowerCase()));
-     if(resultado.length===0){
-       return res.send('No se ha encontrado información para esa raza.');
-     }
-     return res.send(resultado);
-   }
- return res.send(dogs)
- })
 
 
 router.get('/temperaments', async (req,res)=>{
