@@ -85,8 +85,15 @@ const DogBuilder=()=>{
     return <option key={e.name} value={e.name}>{e.name}</option>
   })
 
+  const handleDelete = (borrar)=>{
+    setInput({
+      ...input,
+      temperament: input.temperament.filter(e=> e!==borrar)
+    })
+  }
+
   const renderedSelectedTemperaments = input.temperament && input.temperament.map(e=>{
-    return  <div className={styles.formSelectedTemperaments} key={e}>{e}</div>
+    return  <button onClick={()=>handleDelete(e)}  className={styles.formSelectedTemperaments} key={e}>{e}</button>
   })
   
   const handleSelectTemperament = (e)=>{
@@ -97,6 +104,8 @@ const DogBuilder=()=>{
       })
     }
   }
+
+  
 
   const handleInputChange = (e)=>{
     setInput({

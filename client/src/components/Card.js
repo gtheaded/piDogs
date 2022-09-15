@@ -3,9 +3,15 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import styles from './Styles/Home.module.css'
 
+
+
+
 function Card(props){
+ 
+
   return ( 
     <div className={styles.cardGlobal}>
+      {/* {props.builtInLocal && <button onClick={()=>props.handleDelete(props.id)}>x</button>} */}
       <Link className={styles.cardLink} to={'/dog/home/' + props.id}>
         <h3 >{props.name}</h3>
       </Link>

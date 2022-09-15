@@ -164,6 +164,7 @@
 
 
   .cardGlobal {
+    display:flex;
     width: 400px;
     height: 320px;
     margin: 5px;
@@ -176,6 +177,17 @@
     background-color: #6a91b8;
     border-radius: 20px;
     /* background: linear-gradient(rgba(106, 145, 184,1), rgba(106, 145, 184,0.8)) */
+  }
+
+  .cardGlobal button {
+    align-self:flex-end;
+    background-color: #6a91b8;
+    border-color: gray;
+    width: 20px;
+    text-align: center;
+
+    
+
   }
 
   .cardImgContainer{
@@ -303,8 +315,14 @@
 
   .formSelectedTemperaments{
     display:flex;
+    margin-top: 5px;
+    margin-bottom:5px;
     padding-right: 10px;
-    color:white;
+    color:wheat;
+    background-color: #c0392b;
+    border-radius: 5px;
+    border-color: #c0392b;
+    
   }
 
   .dogBuilderError div{

@@ -84,3 +84,22 @@ export function resetFilters(){
   }
   )
 }
+
+export function deleteDog(id){
+  return async function(dispatch){
+    await axios.get(`http://localhost:3001/dogDelete/${id}`)
+    console.log(id)
+    return dispatch({
+      type: 'DELETE_DOG',
+      payload:id
+    })
+  }
+}
+
+
+/* export function filterMinWeight(payload){
+  return {
+    type: 'MIN_WEIGHT',
+    payload
+  }
+} */

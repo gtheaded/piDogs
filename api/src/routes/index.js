@@ -179,6 +179,22 @@ router.post('/dogs', async (req,res)=>{
 }
 })
 
+
+
+///DELETE
+ router.get('/dogDelete/:id', async(req,res)=>{
+  const row = await Dog.findOne({
+    where: {id: req.params.id}
+  })
+  if(row){
+    await row.destroy();
+    return res.send('Deleted');
+  }
+  return res.send('nothing to delete')
+}) 
+
+
+
 module.exports = router;
 
   /* URLs importantes */

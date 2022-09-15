@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { filterByTemperament, filterCreated, getDogs, getTemperaments, orderBy, resetFilters} from '../actions';
+import { filterByTemperament, filterCreated, getDogs, getTemperaments, orderBy, resetFilters, deleteDog, /* filterMinWeight */} from '../actions';
 import Card from './Card';
 import Pagination from './Pagination'
 import styles from './Styles/Home.module.css';
@@ -18,6 +18,7 @@ const Home  =  (props) =>{
   const [currentPage, sectCurrentPage] = useState(1);
   const [refresher, setRefresher] = useState(true);
   const [loading,setLoading] = useState(true);
+  /* const [minWeight,setMinWeight]= useState(0); */
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
   const currentDogs = allDogs.slice(indexOfFirstDog,indexOfLastDog);
@@ -39,12 +40,17 @@ const Home  =  (props) =>{
     
 },[dispatch])
 
+function handleDelete(id){
+  dispatch(deleteDog(id));
+ 
+}
+
  const renderedList = currentDogs && currentDogs.map(e=>{
   const weight = e.minWeight + ' - ' + e.maxWeight + ' kg';
   const height = e.height + ' cm';
   return (
       
-      <Card key={e.id} name={e.name} life_span={e.life_span} height={height} weight={weight} id={e.id} image={e.image} temperament={e.temperament}/>
+      <Card key={e.id} name={e.name} life_span={e.life_span} height={height} weight={weight} id={e.id} image={e.image} temperament={e.temperament} builtInLocal={e.builtInLocal} handleDelete={handleDelete}/>
       
   )
 })
@@ -75,12 +81,23 @@ const handleReset = (e)=>{
   setRefresher(!refresher);
 }
 
+/* const handleWeight = (e)=>{
+ setMinWeight(e.target.value)
+} */
+
+/* const handleWeightSubmit = ()=>{
+  dispatch(filterMinWeight(minWeight));
+  sectCurrentPage(1);
+  setRefresher(!refresher);
+} */
+
+
 return (
   <div className={styles.homeGlobalContainer} >
     <div className={styles.homeSearchAndFilter}>
       <SearchBar></SearchBar>
       <select defaultValue={'default'} onChange={(e)=>handleSort(e)}>
-        <option value="default" disabled hidden>
+        <option value="default" /* disabled hidden */>
             Order by Name
         </option>
         <option  value = 'asc' >Ascendente</option> 
@@ -88,7 +105,7 @@ return (
       </select>
         
       <select defaultValue={'default'} onChange={(e)=>handleSort(e)}>
-        <option value="default" disabled hidden>
+        <option value="default" /* disabled hidden */>
           Order by Weight
         </option>
         <option value = 'ascw' >Ascendente</option> 
@@ -97,7 +114,7 @@ return (
 
 
       <select defaultValue={'default'} onChange= {(e)=>handleSelectTemperament(e)}>
-        <option value='default' disabled hidden>
+        <option value='default' /* disabled hidden */>
           Filter by Temperament
         </option>
         {renderedTemperaments}
@@ -107,6 +124,8 @@ return (
         <option value = 'created' >Show created</option>
         <option value = 'existente' >Show existing</option>          
       </select>
+     {/*  <input onChange={(e)=>handleWeight(e)} placeholder='Minimum weight' value={minWeight.value}></input>
+      <button onClick={()=>handleWeightSubmit()}>submit weight</button> */}
       <button onClick={()=>handleReset()}>Reset filters</button>
     </div>
     

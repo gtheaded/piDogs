@@ -132,6 +132,20 @@ const rootReducer = (state = initialState, action) => {
             selectedTemperaments:[]
           }
 
+       case 'DELETE_DOG':
+        return {
+          ...state,
+          dogs: state.dogs.filter(e=>e.id !== action.payload),
+          completeListOfDogs: state.completeListOfDogs.filter(e=>e.id !==action.payload)
+        }
+
+       /*  case 'MIN_WEIGHT':
+          state.dogs= state.completeListOfDogs;
+         return {
+          ...state,
+          dogs: state.dogs.filter(e=> e.minWeight>action.payload)
+         } */
+        
       default: 
       return {...state}
       
